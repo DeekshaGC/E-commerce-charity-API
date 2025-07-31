@@ -20,7 +20,7 @@ function connectToMDB(){
     }
 }
 
-app.use("/api/users",userRoutes)
+app.use("/api/v1/users",userRoutes)
 
 app.listen(port,()=>{
     connectToMDB()

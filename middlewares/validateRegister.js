@@ -2,12 +2,13 @@ const { body, validationResult } = require("express-validator")
 
 const registerValidationSchema = [
     body("name")
+        .notEmpty().withMessage("Name is required")
         .matches(/^[A-Za-z\s]+$/)
         .withMessage("Name should contain only alphabets and spaces"),
 
     body("email")
-    .notEmpty().withMessage("Email is required")
-    .isEmail().withMessage("Email should be valid"),
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Email should be valid"),
 
     body("mobile")
         .notEmpty().withMessage("Mobile number is required")
@@ -20,10 +21,6 @@ const registerValidationSchema = [
         .isLength({ min: 6 }).withMessage("Password should contain atleast 6 characters")
         .matches(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])/)
         .withMessage("Password must contain at least 1 uppercase letter, 1 number, and 1 special character"),
-
-body("role")
-    .notEmpty().withMessage("Role is required")
-    .isIn(['super_admin', 'admin', 'user']).withMessage("Role must be super_admin, admin, or user")
 ]
 
 function validateUserRegister(req, res, next) {

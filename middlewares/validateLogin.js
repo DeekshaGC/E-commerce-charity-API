@@ -1,7 +1,7 @@
 const { body, validationResult } = require("express-validator")
 
 const loginValidationSchema = [
-    body("loginId")
+    body("userId")
         .notEmpty().withMessage("Email or mobile is required")
         .custom((value) => {
             const isEmail = /\S+@\S+\.\S+/.test(value);
@@ -14,7 +14,6 @@ const loginValidationSchema = [
 
     body("password")
         .notEmpty().withMessage("Password is required")
-        .isAlphanumeric().withMessage("Password should only contain numbers and alphabets")
         .isLength({ max: 12 }).withMessage("Password should not exceed 12 characaters")
         .isLength({ min: 6 }).withMessage("Password should contain atleast 6 characters")
 ]
