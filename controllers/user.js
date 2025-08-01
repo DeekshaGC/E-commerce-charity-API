@@ -16,6 +16,7 @@ async function register(req, res) {
                 message: "User with this email or mobile already exists"
             });
         } else {
+             console.log(req.body);
             bcrypt.hash(password, 10, async function (err, hash) {
                 if (err) {
                     return res.status(400).json({
@@ -33,6 +34,8 @@ async function register(req, res) {
                 };
 
                 let data = await User.create(user);
+               
+                
 
                 return res.status(201).json({
                     status: "success",
