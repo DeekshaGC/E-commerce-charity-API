@@ -4,9 +4,6 @@ const { uploadToCloudinary } = require("../utils/cloudinary")
 
 async function createCategory(req, res) {
     try {
-        console.log(req.file);
-        console.log(req.body);
-
         const { title } = req.body
 
         if (req.user.role !== "admin" && req.user.role !== "super_admin") {
@@ -15,9 +12,6 @@ async function createCategory(req, res) {
                 message: "Only admin and super admin can create a category"
             });
         }
-
-        console.log(req.file);
-
 
         if (!req.file || !req.file.buffer) {
             return res.status(400).json({
