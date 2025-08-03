@@ -19,6 +19,14 @@ async function createCharity(req,res){
                 message: "Banner is required"
             })
         }
+
+         if(Number(platform_fee)+Number(donation_fee)+Number(profit) > 100){
+            return res.status(400).json({
+                status: "Failed",
+                message:"Sum of donation fee + platform fee + profit should not exceed 100"
+            })
+        }
+
         const bannerURL = await uploadToCloudinary(req.file.buffer)
 
         const newCharity = {
@@ -32,13 +40,6 @@ async function createCharity(req,res){
         }
 
         const data = await Charity.create(newCharity)
-
-        if(Number(platform_fee)+Number(donation_fee)+Number(profit) > 100){
-            return res.status(400).json({
-                status: "Failed",
-                message:"Sum of donation fee + platform fee + profit should not exceed 100"
-            })
-        }
 
         return res.status(201).json({
             status:"Success",

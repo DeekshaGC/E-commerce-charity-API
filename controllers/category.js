@@ -30,7 +30,7 @@ async function createCategory(req, res) {
 
         const data = await Category.create(newCategory)
 
-        res.status(201).json({
+       return res.status(201).json({
             status: "Success",
             message: "Category created successfully",
             data: data
