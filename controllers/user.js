@@ -35,8 +35,6 @@ async function register(req, res) {
 
                 let data = await User.create(user);
                
-                
-
                 return res.status(201).json({
                     status: "success",
                     message: "Registered successfully!!!",
@@ -53,7 +51,6 @@ async function register(req, res) {
         });
     }
 }
-
 
 async function login(req, res) {
     try {
@@ -105,7 +102,6 @@ async function login(req, res) {
         });
     }
 }
-
 
 
 module.exports = { register, login }
