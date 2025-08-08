@@ -5,9 +5,7 @@ const mongoose = require("mongoose")
 const userRoutes =require("./routes/userRoutes")
 const categoryRoutes = require("./routes/categoryRoutes")
 const charityRoutes = require("./routes/charityRoutes")
-
-// const multer = require("multer")
-// const upload = multer({ storage: multer.memoryStorage() })
+const productRoutes = require("./routes/productRoutes")
 
 const mongo_url= process.env.MONGO_URL
 const port= process.env.PORT || 8080
@@ -28,11 +26,7 @@ function connectToMDB(){
 app.use("/api/v1/users",userRoutes)
 app.use("/api/v1/category",categoryRoutes)
 app.use("/api/v1/charity",charityRoutes)
-
-// app.post("/test-upload", upload.single("image"), (req, res) => {
-//   console.log(req.file);
-//   res.send("File uploaded");
-// });
+app.use("/api/v1/product",productRoutes)
 
 app.listen(port,()=>{
     connectToMDB()
