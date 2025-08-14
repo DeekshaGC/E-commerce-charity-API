@@ -319,7 +319,7 @@ async function getAllProductsByCharityId(req, res) {
             });
         }
         const products = await Product.find({ charity_id: charity_id });
-        console.log(charity_id);
+        // console.log(charity_id);
         
 
           if (!products || products.length === 0) {
