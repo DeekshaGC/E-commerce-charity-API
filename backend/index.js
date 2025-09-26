@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 require("dotenv").config()
 const mongoose = require("mongoose")
+const cors = require("cors")
+
 const userRoutes =require("./routes/userRoutes")
 const categoryRoutes = require("./routes/categoryRoutes")
 const charityRoutes = require("./routes/charityRoutes")
@@ -13,6 +15,8 @@ const mongo_url= process.env.MONGO_URL
 const port= process.env.PORT || 8080
 
 app.use(express.json())
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
 
 function connectToMDB(){
     try{
