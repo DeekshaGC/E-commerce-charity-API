@@ -1,18 +1,18 @@
 {
-    "sourceFile": ".gitignore",
+    "sourceFile": "frontend/postcss.config.cjs",
     "activeCommit": 0,
     "commits": [
         {
             "activePatchIndex": 0,
             "patches": [
                 {
-                    "date": 1758556898480,
+                    "date": 1758813787847,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
                 }
             ],
-            "date": 1758556898480,
+            "date": 1758813787847,
             "name": "Commit-0",
-            "content": "# Backend\r\n/backend/node_modules\r\n/backend/.env\r\n/backend/.lh\r\n\r\n\r\n"
+            "content": "module.exports = {\r\n  plugins: {\r\n    tailwindcss: {},\r\n    autoprefixer: {},\r\n  },\r\n};\r\n\r\n\r\n"
         }
     ]
 }
