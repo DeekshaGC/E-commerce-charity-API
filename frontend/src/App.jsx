@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<h1>Home Page</h1>} />
           <Route path="/register" element={<Register />} />
-          {/* login, dashboard, etc. will be added later */}
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </>
