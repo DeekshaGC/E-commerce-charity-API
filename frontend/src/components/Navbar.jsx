@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // icons
+import { Menu, X } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-
-  // Example: fake user login status
-  const isLoggedIn = false;
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -22,29 +21,32 @@ const Navbar = () => {
           <Link to="/" className="hover:text-blue-600">Home</Link>
           <Link to="/products" className="hover:text-blue-600">Products</Link>
           <Link to="/categories" className="hover:text-blue-600">Categories</Link>
-          <Link to="/charity" className="hover:text-blue-600">Charity</Link>
-          <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
+
+          {/* Only Admins & Super Admins */}
+          {user?.role === "admin" || user?.role === "superadmin" ? (
+            <>
+              <Link to="/charity" className="hover:text-blue-600">Charity</Link>
+              <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
+            </>
+          ) : null}
         </div>
 
         {/* Right side */}
         <div className="hidden md:flex space-x-4">
-          {isLoggedIn ? (
+          {user ? (
             <>
-              <Link to="/profile" className="hover:text-blue-600">Profile</Link>
-              <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+              <span className="text-gray-600">Hi, {user.email}</span>
+              <button
+                onClick={logout}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+              >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" 
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
-              <Link
-                to="/register"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-              >
-                Register
-              </Link>
+              <Link to="/login" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</Link>
+              <Link to="/register" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Register</Link>
             </>
           )}
         </div>
@@ -64,24 +66,29 @@ const Navbar = () => {
           <Link to="/" className="block hover:text-blue-600">Home</Link>
           <Link to="/products" className="block hover:text-blue-600">Products</Link>
           <Link to="/categories" className="block hover:text-blue-600">Categories</Link>
-          <Link to="/charity" className="block hover:text-blue-600">Charity</Link>
-          <Link to="/dashboard" className="block hover:text-blue-600">Dashboard</Link>
+
+          {user?.role === "admin" || user?.role === "superadmin" ? (
+            <>
+              <Link to="/charity" className="block hover:text-blue-600">Charity</Link>
+              <Link to="/dashboard" className="block hover:text-blue-600">Dashboard</Link>
+            </>
+          ) : null}
 
           <hr />
-          {isLoggedIn ? (
+          {user ? (
             <>
-              <Link to="/profile" className="block hover:text-blue-600">Profile</Link>
-              <button className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+              <span className="block text-gray-600">Hi, {user.email}</span>
+              <button
+                onClick={logout}
+                className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+              >
                 Logout
               </button>
             </>
           ) : (
             <>
               <Link to="/login" className="block hover:text-blue-600">Login</Link>
-              <Link
-                to="/register"
-                className="block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-              >
+              <Link to="/register" className="block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                 Register
               </Link>
             </>
